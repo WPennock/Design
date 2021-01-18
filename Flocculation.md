@@ -23,13 +23,14 @@ GFloc = (u.g_0*HeadLossFloc/(nu*NumCampFloc)).to(1/u.s) # Camp number of the flo
 print('The hydraulic velocity gradient of the flocculator is ',GFloc,'.',sep='')
 TimeResidFloc = (NumCampFloc/GFloc).to(u.s) # Hydraulic residence time of the flocculator
 print('The hydraulic residence time of the flocculator is ',TimeResidFloc,'.',sep='')
-DiamNomFloc = 5*u.inch
+DiamNomFloc = 3*u.inch
 LocPipeFloc = (np.abs(np.array(pipes.pipedb['NDinch'])-DiamNomFloc.magnitude)).argmin() # Index for diffuser in pipe_database.csv
 DiamFloc = (pipes.pipedb.iloc[LocPipeFloc,6]*u.inch).to(u.cm)
 AreaFloc = pc.area_circle(DiamFloc) # Area of pipe
 VolFloc = (FlowPlant*TimeResidFloc).to(u.L) # Required volume for the flocculator
 LengthFloc = (VolFloc/AreaFloc).to(u.m) # Required length to achieve the necessary residence time
 print('The length of the flocculator is ',LengthFloc,'.',sep='')
+LengthFloc/(1.4*u.m)
 VelocityFloc = (FlowPlant/AreaFloc).to(u.cm/u.s) # Nominal velocity through flocculator (without baffles)
 print('The velocity through the flocculator is ',VelocityFloc,'.',sep='')
 ReFloc = pc.re_pipe(FlowPlant,DiamFloc,nu)
